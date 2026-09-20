@@ -187,29 +187,8 @@ function renderMsg(m){
   d.innerHTML=`<b>${esc(m.name)}</b><div>${esc(m.text)}</div>`;
   box.appendChild(d);
   box.scrollTop=box.scrollHeight;
-}(m){
-  const box=document.getElementById("msgs");
-  if(!box)return;
-
-  const key=m.id || `${m.name}|${m.text}|${m.createdAt||""}`;
-
-  if(box.querySelector(`[data-msg-id="${CSS.escape(String(key))}"]`))return;
-
-  let d=document.createElement("div");
-  d.className="msg";
-  d.dataset.msgId=key;
-  d.innerHTML=`<b>${esc(m.name)}</b><div>${esc(m.text)}</div>`;
-  box.appendChild(d);
-  box.scrollTop=box.scrollHeight;
 }
-  let d=document.createElement("div");
-  d.className="msg";
-  d.innerHTML=`<b>${esc(m.name)}</b><div>${esc(m.text)}</div>`;
-  document.getElementById("msgs")?.appendChild(d);
-  let x=document.getElementById("msgs");
-  if(x)x.scrollTop=x.scrollHeight
-}
-
+  
 function sendGlobal(){
   let x=document.getElementById("chatInput").value.trim();
   if(!x)return;

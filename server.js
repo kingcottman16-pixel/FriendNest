@@ -33,7 +33,8 @@ function safe(u){ return {id:u.id,name:u.name,email:u.email,pfp:u.pfp||""}; }
 
 app.post("/api/register", async (req,res)=>{
   const {name,email,password}=req.body||{};
-  if(!name||!email||!password||password.length<6) return res.status(400).json({error:"Enter a name, email, and password of at least 6 characters."});
+  if(!name || !email || !password) return res.status(400).json({error:"Please enter your name, email, and password."});
+if(String(password).length < 6) return res.status(400).json({error:"Password must be at least 6 characters."});
   if([...users.values()].some(u=>u.email.toLowerCase()===email.toLowerCase())) return res.status(409).json({error:"That email is already registered."});
   const user={id:String(nextId++),name:name.trim().slice(0,40),email:email.trim(),hash:await bcrypt.hash(password,10),pfp:""};
   users.set(user.id,user);

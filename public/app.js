@@ -174,6 +174,20 @@ async function loadGlobal(){
 }
 
 function renderMsg(m){
+  const box=document.getElementById("msgs");
+  if(!box)return;
+
+  const key=m.id || `${m.name}|${m.text}|${m.createdAt||""}`;
+
+  if(box.querySelector(`[data-msg-id="${CSS.escape(String(key))}"]`))return;
+
+  let d=document.createElement("div");
+  d.className="msg";
+  d.dataset.msgId=key;
+  d.innerHTML=`<b>${esc(m.name)}</b><div>${esc(m.text)}</div>`;
+  box.appendChild(d);
+  box.scrollTop=box.scrollHeight;
+}
   let d=document.createElement("div");
   d.className="msg";
   d.innerHTML=`<b>${esc(m.name)}</b><div>${esc(m.text)}</div>`;
